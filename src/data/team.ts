@@ -23,55 +23,11 @@ export const teamMembers: TeamMember[] = [
       en: 'Founding Partner',
     },
     bio: {
-      pt: 'Especialista em Direito Digital com mais de 15 anos de experiência. Mestre em Proteção de Dados pela USP.',
-      en: 'Digital Law specialist with over 15 years of experience. Master in Data Protection from USP.',
+      pt: 'Advogado, pesquisador, empreendedor e professor. Doutorando em Biotecnologia pela UFAM, com foco em inovação e desenvolvimento sustentável. Mestre em Direito Político e Econômico (Mackenzie) e especialista em Direito Digital (USP), Negócios da Amazônia (UEA) e Tecnologias para Negócios (PUC/RS). Fundador da SELVA – Amazonic Blockchain Ecosystem, atua com consultoria jurídica em novas tecnologias, propriedade intelectual e governança, com ênfase na valorização dos ativos naturais da Amazônia. Ex-professor universitário e membro ativo da OAB/AM, com destacada atuação em Direito e inovação. Professor universitário (UNINORTE)',
+      en: "Lawyer, researcher, entrepreneur, and professor. PhD candidate in Biotechnology at UFAM, focusing on innovation and sustainable development. Master's degree in Political and Economic Law (Mackenzie) and specialist in Digital Law (USP), Amazonian Business (UEA), and Technologies for Business (PUC/RS). Founder of SELVA – Amazonian Blockchain Ecosystem, he works as a legal consultant in new technologies, intellectual property, and governance, with an emphasis on valuing the natural assets of the Amazon. Former university professor and active member of the OAB/AM (Brazilian Bar Association, Amazonas chapter), with a distinguished career in Law and innovation. University professor (UNINORTE).",
     },
-    image: '/placeholder.svg',
+    image: '/rafael-paixao.png',
     linkedin: 'https://linkedin.com',
     instagram: 'https://instagram.com',
-  },
-  {
-    id: '2',
-    name: 'Dra. Carolina Paixão',
-    role: {
-      pt: 'Sócia Fundadora',
-      en: 'Founding Partner',
-    },
-    bio: {
-      pt: 'Especialista em Propriedade Intelectual e Contratos Digitais. Doutora em Direito pela PUC-SP.',
-      en: 'Specialist in Intellectual Property and Digital Contracts. PhD in Law from PUC-SP.',
-    },
-    image: '/placeholder.svg',
-    linkedin: 'https://linkedin.com',
-    instagram: 'https://instagram.com',
-  },
-  {
-    id: '3',
-    name: 'Dr. Marcos Oliveira',
-    role: {
-      pt: 'Advogado Sênior',
-      en: 'Senior Associate',
-    },
-    bio: {
-      pt: 'Especialista em Compliance Digital e LGPD. Certificado em Data Privacy pela IAPP.',
-      en: 'Specialist in Digital Compliance and LGPD. Certified in Data Privacy by IAPP.',
-    },
-    image: '/placeholder.svg',
-    linkedin: 'https://linkedin.com',
-  },
-  {
-    id: '4',
-    name: 'Dra. Amanda Santos',
-    role: {
-      pt: 'Advogada Associada',
-      en: 'Associate',
-    },
-    bio: {
-      pt: 'Especialista em Gestão de Crise e Marketing Digital. MBA em Comunicação Corporativa.',
-      en: 'Specialist in Crisis Management and Digital Marketing. MBA in Corporate Communication.',
-    },
-    image: '/placeholder.svg',
-    linkedin: 'https://linkedin.com',
-    instagram: 'https://instagram.com',
-  },
+  }
 ];

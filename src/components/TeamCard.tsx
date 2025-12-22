@@ -19,58 +19,55 @@ export const TeamCard = ({ member, index }: TeamCardProps) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
       <motion.div
-        className="group relative card-gradient rounded-2xl p-6 border border-border hover:border-accent/50 transition-all duration-500 text-center"
+        className="group relative card-gradient rounded-2xl p-6 border border-border hover:border-accent/50 transition-all duration-500 text-center flex"
         whileHover={{ y: -8 }}
         transition={{ type: 'spring', stiffness: 300 }}
       >
         {/* Avatar */}
-        <div className="relative mb-6 mx-auto">
-          <div className="w-32 h-32 mx-auto rounded-full bg-secondary overflow-hidden ring-4 ring-background shadow-xl group-hover:ring-accent/30 transition-all">
-            <div className="w-full h-full flex items-center justify-center bg-accent/10">
-              <User className="w-16 h-16 text-accent/50" />
-            </div>
-          </div>
+        <div className="relative flex-shrink-0">
+          <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full object-cover" />
           {/* Glow effect */}
-          <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          {/* <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" /> */}
         </div>
 
         {/* Info */}
-        <h3 className="text-xl font-serif font-semibold text-foreground mb-1">
-          {member.name}
-        </h3>
-        <p className="text-accent font-medium text-sm mb-3">
-          {member.role[language]}
-        </p>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-          {member.bio[language]}
-        </p>
+        <div className="flex-1 text-start ml-12">
+          <h3 className="text-xl font-serif font-semibold text-foreground mb-1">
+            {member.name}
+          </h3>
+          <p className="text-accent font-medium text-sm mb-3">
+            {member.role[language]}
+          </p>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+            {member.bio[language]}
+          </p>
 
-        {/* Social Links */}
-        <div className="flex justify-center gap-3">
-          {member.linkedin && (
-            <motion.a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-all"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Linkedin className="h-4 w-4" />
-            </motion.a>
-          )}
-          {member.instagram && (
-            <motion.a
-              href={member.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-lg bg-secondary hover:bg-purple hover:text-purple-foreground transition-all"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Instagram className="h-4 w-4" />
-            </motion.a>
-          )}
+          <div className="flex items-start justify-start gap-3">
+            {member.linkedin && (
+              <motion.a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Linkedin className="h-4 w-4" />
+              </motion.a>
+            )}
+            {member.instagram && (
+              <motion.a
+                href={member.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-lg bg-secondary hover:bg-purple hover:text-purple-foreground transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Instagram className="h-4 w-4" />
+              </motion.a>
+            )}
+          </div>
         </div>
       </motion.div>
     </motion.div>

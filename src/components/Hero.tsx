@@ -104,28 +104,6 @@ export const Hero = () => {
             </Button>
           </motion.div>
 
-          {/* Trust Indicators */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-16 pt-12 border-t border-border/50"
-          >
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-serif font-bold text-gradient">15+</div>
-                <div className="text-sm text-muted-foreground mt-1">Anos de Experiência</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-serif font-bold text-gradient">500+</div>
-                <div className="text-sm text-muted-foreground mt-1">Clientes Atendidos</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-serif font-bold text-gradient">98%</div>
-                <div className="text-sm text-muted-foreground mt-1">Taxa de Sucesso</div>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
 
