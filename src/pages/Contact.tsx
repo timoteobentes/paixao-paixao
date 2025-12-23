@@ -26,13 +26,13 @@ const Contact = () => {
       icon: MapPin,
       label: 'Endereço',
       value: t.contact.info.address,
-      href: '#',
+      href: 'https://maps.app.goo.gl/B9jQW5bKqqxbyyjN6',
     },
     {
       icon: Clock,
       label: 'Horário',
-      value: 'Seg - Sex: 9h - 18h',
-      href: '#',
+      value: 'Seg - Sex: 9h - 17h',
+      href: '',
     },
   ];
 
@@ -56,9 +56,6 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-              {t.contact.title}
-            </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-4">
               {t.contact.subtitle}
             </h1>
@@ -102,13 +99,10 @@ const Contact = () => {
               {/* Map Placeholder */}
               <div className="card-gradient rounded-2xl p-8 border border-border overflow-hidden relative h-64">
                 <div className="absolute inset-0 bg-secondary/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="h-12 w-12 text-accent mx-auto mb-2" />
-                    <p className="text-muted-foreground">São Paulo, SP</p>
-                  </div>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8588559348323!2d-60.027213225028895!3d-3.1319783968434938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x926c05c1e7e7485d%3A0xe6b926c186dbcfd2!2sEdif%C3%ADcio%20Rio%20Negro%20Center!5e0!3m2!1spt-BR!2sbr!4v1766527315391!5m2!1spt-BR!2sbr" width="1000" height="250" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 {/* Abstract tech grid overlay */}
-                <div
+                {/* <div
                   className="absolute inset-0 opacity-10"
                   style={{
                     backgroundImage: `
@@ -117,7 +111,7 @@ const Contact = () => {
                     `,
                     backgroundSize: '30px 30px',
                   }}
-                />
+                /> */}
               </div>
             </motion.div>
 

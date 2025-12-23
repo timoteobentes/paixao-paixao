@@ -48,7 +48,7 @@ export const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group">
               <motion.div
-                className="relative flex flex-col items-center text-foreground hover:text-gradient transition-colors"
+                className="relative flex flex-col items-center text-foreground"
                 // whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >

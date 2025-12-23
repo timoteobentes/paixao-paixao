@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 export const Footer = () => {
   const { t } = useLanguage();
+  const year = new Date().getFullYear();
 
   return (
     <footer className="relative border-t border-border bg-card">
@@ -11,16 +12,17 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="inline-block">
-              <span className="text-2xl font-serif font-bold text-foreground">
-                Paixão <span className="text-gradient">&</span> Paixão
+            <Link to="/" className="relative flex flex-col items-center w-[80%]">
+              <span className="text-xl md:text-2xl font-serif font-bold">
+                PAIXÃO & PAIXÃO
               </span>
-              <span className="block text-xs text-muted-foreground tracking-widest uppercase">
+              <span className='w-[100%] h-[1px] bg-foreground'></span>
+              <span className="block text-[10px] md:text-xs tracking-widest uppercase">
                 Advogados Associados
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              {t.hero.subheadline.slice(0, 100)}...
+              {t.footer.subheadline}
             </p>
             <div className="flex gap-3">
               <a
@@ -66,6 +68,11 @@ export const Footer = () => {
                   {t.nav.contact}
                 </Link>
               </li>
+              <li>
+                <Link to="/privacidade" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  {t.footer.privacy}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -88,6 +95,11 @@ export const Footer = () => {
                   {t.services.items.compliance.title}
                 </Link>
               </li>
+              <li>
+                <Link to="/servicos/gestao-de-crise" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  {t.services.items.crisisManagement.title}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -104,7 +116,7 @@ export const Footer = () => {
                 {t.contact.info.phone}
               </li>
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 text-accent mt-0.5" />
+                <MapPin className="h-8 w-8 text-accent mt-0.5" />
                 {t.contact.info.address}
               </li>
             </ul>
@@ -114,14 +126,12 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            {t.footer.rights}
+            © {year} {t.footer.rights}
           </p>
-          <div className="flex gap-6">
-            <Link to="/privacidade" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-              {t.footer.privacy}
-            </Link>
-            <Link to="/termos" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-              {t.footer.terms}
+          <div className="flex gap-2 text-sm text-muted-foreground">
+            Desenvolvido por 
+            <Link to="https://www.amadev.com.br" className="text-sm text-accent hover:text-muted-foreground transition-colors">
+              amadev
             </Link>
           </div>
         </div>

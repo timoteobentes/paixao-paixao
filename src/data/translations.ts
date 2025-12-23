@@ -50,6 +50,7 @@ export interface Translation {
     };
   };
   footer: {
+    subheadline: string;
     rights: string;
     privacy: string;
     terms: string;
@@ -77,7 +78,7 @@ export const translations: Record<'pt' | 'en', Translation> = {
     },
     services: {
       title: 'Nossas Soluções',
-      subtitle: 'Expertise jurídica especializada para o mundo digital',
+      subtitle: 'Soluções jurídicas especializada para o mundo digital',
       learnMore: 'Saiba Mais',
       items: {
         digitalContracts: {
@@ -184,13 +185,14 @@ export const translations: Record<'pt' | 'en', Translation> = {
         success: 'Mensagem enviada com sucesso!',
       },
       info: {
-        email: 'contato@paixaoepaixao.adv.br',
-        phone: '+55 (11) 99999-9999',
-        address: 'Av. Paulista, 1000, São Paulo - SP',
+        email: 'rafael@selva.eco.br',
+        phone: '+55 (92) 94811-4406',
+        address: 'Rua 24 de Maio, 220 - Centro, Manaus - AM (Edifício Rio Negro Center, sala 219)',
       },
     },
     footer: {
-      rights: '© 2024 Paixão & Paixão Advogados. Todos os direitos reservados.',
+      subheadline: 'Excelência Jurídica em Direito Digital para um Mundo Conectado',
+      rights: 'Paixão & Paixão Advogados. Todos os direitos reservados.',
       privacy: 'Política de Privacidade',
       terms: 'Termos de Uso',
     },
@@ -215,7 +217,7 @@ export const translations: Record<'pt' | 'en', Translation> = {
     },
     services: {
       title: 'Our Solutions',
-      subtitle: 'Specialized legal expertise for the digital world',
+      subtitle: 'Specialized legal soluctions for the digital world',
       learnMore: 'Learn More',
       items: {
         digitalContracts: {
@@ -322,13 +324,14 @@ export const translations: Record<'pt' | 'en', Translation> = {
         success: 'Message sent successfully!',
       },
       info: {
-        email: 'contact@paixaoepaixao.adv.br',
-        phone: '+55 (11) 99999-9999',
-        address: 'Av. Paulista, 1000, São Paulo - SP',
+        email: 'rafael@selva.eco.br',
+        phone: '+55 (92) 94811-4406',
+        address: 'Rua 24 de Maio, 220 - Centro, Manaus - AM (Edifício Rio Negro Center, sala 219)',
       },
     },
     footer: {
-      rights: '© 2024 Paixão & Paixão Lawyers. All rights reserved.',
+      subheadline: 'Legal Excellence in Digital Law for a Connected World',
+      rights: 'Paixão & Paixão Lawyers. All rights reserved.',
       privacy: 'Privacy Policy',
       terms: 'Terms of Use',
     },
