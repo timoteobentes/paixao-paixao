@@ -130,7 +130,7 @@ export const Footer = () => {
           </p>
           <div className="flex gap-2 text-sm text-muted-foreground">
             Desenvolvido por 
-            <Link to="https://www.amadev.com.br" className="text-sm text-accent hover:text-muted-foreground transition-colors">
+            <Link to="https://www.amadev.com.br" target="_blank" className="font-bold text-sm text-accent hover:text-muted-foreground transition-colors">
               amadev
             </Link>
           </div>
