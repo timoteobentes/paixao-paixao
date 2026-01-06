@@ -1,16 +1,60 @@
+import { useEffect } from 'react'; // <--- 1. Importar useEffect
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { BackgroundEffects } from '@/components/BackgroundEffects';
+import { BackgroundEffects } from '@/components/BackgroundEffects'; // Verifique se o caminho está correto
 import { useLanguage } from '@/contexts/LanguageContext';
 import { services } from '@/data/services';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const ServicePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
+  const smoothScrollTo = (targetId: string) => {
+    if (targetId === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    if (!href.startsWith('/#')) {
+      navigate(href);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const targetId = href.replace('/#', '');
+
+    if (location.pathname === '/') {
+      smoothScrollTo(targetId);
+    } else {
+      navigate('/', { state: { scrollTo: targetId } });
+    }
+  };
 
   const service = services.find((s) => s.slug === slug);
 
@@ -33,7 +77,8 @@ const ServicePage = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-background"
     >
-      <BackgroundEffects />
+      {/* BackgroundEffects se você tiver o componente, caso contrário pode remover */}
+      <BackgroundEffects /> 
       <Header />
 
       <main className="pt-32 pb-24">
@@ -45,13 +90,14 @@ const ServicePage = () => {
             transition={{ duration: 0.4 }}
             className="mb-8"
           >
-            <Link
-              to="/#services"
+            <a
+              href="/#services"
+              onClick={(e) => handleNavClick(e, '/#services')}
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
               {t.servicePage.backToServices}
-            </Link>
+            </a>
           </motion.div>
 
           {/* Hero Section */}
@@ -123,7 +169,7 @@ const ServicePage = () => {
               <Button
                 asChild
                 size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-lg font-medium rounded-xl glow-cyan"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-lg font-medium rounded-xl glow-cyan relative z-40 cursor-pointer"
               >
                 <Link to="/contato">
                   {t.servicePage.cta}

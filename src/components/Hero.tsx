@@ -69,7 +69,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20" id="hero">
       
       {/* --- BACKGROUND --- */}
       <div className="absolute inset-0 bg-[url(/hero-back.jpg)] bg-center bg-no-repeat bg-cover" />

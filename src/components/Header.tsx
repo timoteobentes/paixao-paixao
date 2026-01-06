@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Globe, Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -10,10 +11,12 @@ export const Header = () => {
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
-    { href: '/', label: t.nav.home },
+    { href: '/#hero', label: t.nav.home },
     { href: '/#services', label: t.nav.services },
     { href: '/#team', label: t.nav.team },
     { href: '/#faq', label: t.nav.faq },
@@ -22,17 +25,55 @@ export const Header = () => {
 
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/';
-    if (href.startsWith('/#')) return location.pathname === '/' && location.hash === href.slice(1);
-    return location.pathname === href;
+    return location.pathname === href.replace('/#', '/');
   };
 
-  const handleNavClick = (href: string) => {
+  const smoothScrollTo = (targetId: string) => {
+    if (targetId === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === '/' && location.state && (location.state as any).scrollTo) {
+      const targetId = (location.state as any).scrollTo;
+
+      setTimeout(() => {
+        smoothScrollTo(targetId);
+        window.history.replaceState({}, document.title);
+      }, 100);
+    }
+  }, [location]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
-    if (href.startsWith('/#')) {
-      const element = document.getElementById(href.slice(2));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+
+    if (!href.startsWith('/#')) {
+      navigate(href);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const targetId = href.replace('/#', '');
+
+    if (location.pathname === '/') {
+      smoothScrollTo(targetId);
+    } else {
+      navigate('/', { state: { scrollTo: targetId } });
     }
   };
 
@@ -46,10 +87,13 @@ export const Header = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group">
+            <a 
+              href="/" 
+              onClick={(e) => handleNavClick(e, '/#hero')}
+              className="flex items-center gap-2 group cursor-pointer"
+            >
               <motion.div
                 className="relative flex flex-col items-center text-foreground"
-                // whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
                 <span className="text-xl md:text-2xl font-serif font-bold">
@@ -60,16 +104,16 @@ export const Header = () => {
                   Advogados Associados
                 </span>
               </motion.div>
-            </Link>
+            </a>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.href}
-                  to={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className={`relative text-sm font-medium transition-colors hover:text-accent ${
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`relative text-sm font-medium transition-colors hover:text-accent cursor-pointer ${
                     isActive(link.href) ? 'text-accent' : 'text-foreground/80'
                   }`}
                 >
@@ -80,13 +124,12 @@ export const Header = () => {
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full"
                     />
                   )}
-                </Link>
+                </a>
               ))}
             </nav>
 
-            {/* Actions */}
+            {/* Actions (Language / Theme / Mobile) */}
             <div className="flex items-center gap-2">
-              {/* Language Switcher */}
               <Button
                 variant="ghost"
                 size="sm"
@@ -97,7 +140,6 @@ export const Header = () => {
                 <span className="uppercase font-medium">{language}</span>
               </Button>
 
-              {/* Theme Toggle */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -129,7 +171,6 @@ export const Header = () => {
                 </AnimatePresence>
               </Button>
 
-              {/* Mobile Menu Button */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -153,16 +194,16 @@ export const Header = () => {
             >
               <nav className="container mx-auto px-6 py-4 flex flex-col gap-4">
                 {navLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.href}
-                    to={link.href}
-                    onClick={() => handleNavClick(link.href)}
-                    className={`text-base font-medium transition-colors ${
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`text-base font-medium transition-colors cursor-pointer ${
                       isActive(link.href) ? 'text-accent' : 'text-foreground/80'
                     }`}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 ))}
                 <div className="flex items-center gap-2 pt-2 border-t border-border/50">
                   <Button
