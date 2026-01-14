@@ -75,14 +75,14 @@ export const TeamSection = () => {
 
                 {/* Conteúdo do Modal */}
                 <div className="flex-1 p-8 text-left">
-                  <h3 className="text-2xl font-serif font-bold text-foreground mb-1">
+                  <h3 className="text-2xl font-serif font-bold text-foreground mb-1 w-[90%]">
                     {selectedMember.name}
                   </h3>
                   <p className="text-accent font-medium text-lg mb-6">
                     {selectedMember.role[language]}
                   </p>
                   
-                  <div className="prose prose-sm text-muted-foreground mb-8 max-h-[300px] overflow-y-auto pr-2">
+                  <div className="prose prose-sm text-muted-foreground mb-8 min-h-[264px] max-h-[300px] overflow-y-auto pr-2">
                     {selectedMember.bio[language]}
                   </div>
 
