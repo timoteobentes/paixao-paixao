@@ -44,6 +44,7 @@ export interface Translation {
       success: string;
     };
     info: {
+      title: string;
       email: string;
       phone: string;
       address: string;
@@ -59,6 +60,11 @@ export interface Translation {
     benefits: string;
     cta: string;
     backToServices: string;
+    noService: string;
+    learnMore: string;
+    descriptionMore: string;
+    ctaMore: string;
+    othersServices: string;
   };
 }
 
@@ -185,7 +191,8 @@ export const translations: Record<'pt' | 'en', Translation> = {
         success: 'Mensagem enviada com sucesso!',
       },
       info: {
-        email: 'rafael@selva.eco.br',
+        title: 'Informações de Contato',
+        email: 'contato@paixao.adv.br',
         phone: '+55 (92) 94811-4406',
         address: 'Rua 24 de Maio, 220 - Centro, Manaus - AM (Edifício Rio Negro Center, sala 219)',
       },
@@ -200,6 +207,11 @@ export const translations: Record<'pt' | 'en', Translation> = {
       benefits: 'Benefícios',
       cta: 'Fale com um Especialista',
       backToServices: 'Voltar para Soluções',
+      noService: 'Serviço não encontrado',
+      learnMore: 'Saiba mais',
+      descriptionMore: 'Para saber mais informações, agendar uma conversa ou entender como podemos ajudar especificamente no seu caso:',
+      ctaMore: 'Entre em contato com nossa equipe',
+      othersServices: 'Outras Áreas de Atuação'
     },
   },
   en: {
@@ -324,7 +336,8 @@ export const translations: Record<'pt' | 'en', Translation> = {
         success: 'Message sent successfully!',
       },
       info: {
-        email: 'rafael@selva.eco.br',
+        title: 'Contact Information',
+        email: 'contato@paixao.adv.br',
         phone: '+55 (92) 94811-4406',
         address: 'Rua 24 de Maio, 220 - Centro, Manaus - AM (Edifício Rio Negro Center, sala 219)',
       },
@@ -339,6 +352,11 @@ export const translations: Record<'pt' | 'en', Translation> = {
       benefits: 'Benefits',
       cta: 'Talk to a Specialist',
       backToServices: 'Back to Services',
+      noService: 'Service not found',
+      learnMore: 'Learn more',
+      descriptionMore: 'To learn more, schedule a conversation, or understand how we can specifically help in your case:',
+      ctaMore: 'Get in touch with our team.',
+      othersServices: 'Other Areas of Expertise'
     },
   },
 };

@@ -77,7 +77,7 @@ const Contact = () => {
             >
               <div className="card-gradient rounded-2xl p-8 border border-border">
                 <h2 className="text-2xl font-serif font-semibold text-foreground mb-6">
-                  Informações de Contato
+                  {t.contact.info.title}
                 </h2>
                 <div className="space-y-6">
                   {contactInfo.map((item, index) => (

@@ -34,7 +34,7 @@ const ServicePage = () => {
   if (!service) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <p>Serviço não encontrado</p>
+        <p>{t.servicePage.noService}</p>
       </div>
     );
   }
@@ -132,13 +132,13 @@ const ServicePage = () => {
             className="border-t border-border pt-16"
           >
             <h2 className="text-4xl md:text-5xl font-light font-serif text-foreground mb-8">
-              Saiba mais
+              {t.servicePage.learnMore}
             </h2>
             
             <div className="flex flex-col md:flex-row gap-12 items-start text-muted-foreground">
               <div className="max-w-lg">
                 <p className="mb-8 text-lg">
-                  Para saber mais informações, agendar uma conversa ou entender como podemos ajudar especificamente no seu caso:
+                  {t.servicePage.descriptionMore}
                 </p>
                 
                 <div className="flex flex-col gap-6">
@@ -149,14 +149,14 @@ const ServicePage = () => {
                     className="self-start text-accent hover:text-accent/80 p-0 h-auto text-xl font-medium decoration-2 underline-offset-8 hover:underline"
                   >
                     <Link to="/contato" className="flex items-center gap-2">
-                      Entre em contato com nossa equipe
+                      {t.servicePage.ctaMore}
                       <ArrowUpRight className="w-6 h-6" />
                     </Link>
                   </Button>
 
                   <div className="mt-8">
                     <p className="text-xs uppercase tracking-widest font-semibold text-muted-foreground/60 mb-4">
-                      Outras Áreas de Atuação
+                      {t.servicePage.othersServices}
                     </p>
                     <div className="flex flex-wrap gap-3">
                         {services
