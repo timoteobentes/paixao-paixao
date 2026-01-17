@@ -1,10 +1,53 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Footer = () => {
   const { t } = useLanguage();
   const year = new Date().getFullYear();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const smoothScrollTo = (targetId: string) => {
+    if (targetId === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    if (!href.startsWith('/#')) {
+      navigate(href);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const targetId = href.replace('/#', '');
+
+    if (location.pathname === '/') {
+      smoothScrollTo(targetId);
+    } else {
+      navigate('/', { state: { scrollTo: targetId } });
+    }
+  };
 
   return (
     <footer className="relative border-t border-border bg-card">
@@ -54,17 +97,26 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/"
+                  onClick={(e) => handleNavClick(e, '/#services')}
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   {t.nav.services}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/#team" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <a
+                  href="/"
+                  onClick={(e) => handleNavClick(e, '/#team')}
+                  className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   {t.nav.team}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/contato" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                <Link to="/contato" className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                >
                   {t.nav.contact}
                 </Link>
               </li>
