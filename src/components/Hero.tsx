@@ -168,7 +168,7 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator 
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
         animate={{ y: [0, 10, 0] }}
@@ -181,7 +181,7 @@ export const Hero = () => {
             transition={{ duration: 2, repeat: Infinity }}
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 };

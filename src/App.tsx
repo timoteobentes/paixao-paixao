@@ -9,6 +9,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import ServicePage from "./pages/ServicePage";
+import Posts from "./pages/Posts";
+import PostPage from "./pages/PostPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,7 +28,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/contato" element={<Contact />} />
                 <Route path="/servicos/:slug" element={<ServicePage />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="/posts" element={<Posts />} />
+                <Route path="/posts/:slug" element={<PostPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>

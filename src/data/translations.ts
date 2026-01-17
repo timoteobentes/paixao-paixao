@@ -3,6 +3,7 @@ export interface Translation {
     home: string;
     services: string;
     team: string;
+    posts: string;
     faq: string;
     contact: string;
   };
@@ -68,6 +69,7 @@ export const translations: Record<'pt' | 'en', Translation> = {
       home: 'Início',
       services: 'Soluções',
       team: 'Equipe',
+      posts: 'Publicações',
       faq: 'Dúvidas',
       contact: 'Contato',
     },
@@ -207,6 +209,7 @@ export const translations: Record<'pt' | 'en', Translation> = {
       home: 'Home',
       services: 'Services',
       team: 'Team',
+      posts: 'Posts',
       faq: 'FAQ',
       contact: 'Contact',
     },
