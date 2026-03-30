@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import ServicePage from "./pages/ServicePage";
 import Posts from "./pages/Posts";
 import PostPage from "./pages/PostPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
                 <Route path="/servicos/:slug" element={<ServicePage />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/posts/:slug" element={<PostPage />} />
+                <Route path="/privacidade" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>
