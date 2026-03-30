@@ -73,7 +73,7 @@ export const publications: Publication[] = [
     },
     authors: ['Dr. Rafael Paixão'],
     date: '2019-04-11',
-    image: 'https://media.licdn.com/dms/image/v2/C5612AQFUhdsXqCXzQA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1639877756699?e=2147483647&v=beta&t=UQKS-cwbbCPUEQXXJcbkUBUDWdOAVx5-9Msz5mGY4iQ',
+    image: 'https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/noticias/2023/02/bioeconomia-pode-impulsionar-reindustrializacao-brasileira-em-bases-verdes/bioeconomiafreepik.jpg',
     tags: ['PCB', 'Amazonas', 'Bioeconomia', 'Inovação', 'Sustentabilidade'],
     // downloadUrl: '#',
   },
@@ -119,7 +119,7 @@ export const publications: Publication[] = [
     },
     authors: ['Dr. Rafael Paixão'],
     date: '2020-06-05',
-    image: 'https://media.licdn.com/dms/image/v2/C4D12AQFINHRd4cZgEQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1591385003393?e=1770249600&v=beta&t=alwQOA7eoH88kfLcowNrgwnbM4FR_4XHFhnbCYx_AQg',
+    image: 'https://www.selva.eco.br/SELVA.png',
     tags: ['SELVA', 'Amazônia', 'Desenvolvimento Sustentável', 'Economia Verde', 'Inovação' ],
   }
 ];

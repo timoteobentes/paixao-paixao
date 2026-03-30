@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { BackgroundEffects } from '@/components/BackgroundEffects';
@@ -9,7 +9,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { publications, PublicationCategory, categoryLabels } from '@/data/posts';
 import { Loader2 } from 'lucide-react';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 type FilterCategory = 'all' | PublicationCategory;
 
@@ -37,110 +37,133 @@ export default function Publications() {
 
   const handleFilterChange = (filter: FilterCategory) => {
     setActiveFilter(filter);
-    setVisibleCount(ITEMS_PER_PAGE);
+    setVisibleCount(ITEMS_PER_PAGE); // Reseta a carga para reanimar a grade base
   };
 
   const handleLoadMore = () => {
     setIsLoading(true);
-    // Simulate loading delay
     setTimeout(() => {
       setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
       setIsLoading(false);
-    }, 500);
+    }, 600);
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground selection:bg-accent/30 selection:text-accent-foreground">
+      {/* Background limpo unificado */}
       <BackgroundEffects />
+      
       <Header />
 
-      <main className="relative pt-32 pb-20">
-        <div className="container mx-auto px-4 md:px-6">
-          {/* Header Section */}
+      <main className="relative pt-40 pb-20">
+        <div className="container mx-auto px-6">
+          
+          {/* Cabeçalho do Blog */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
-              {language === 'pt' ? 'Publicações' : 'Publications'}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6 tracking-tight">
+              {language === 'pt' ? 'Nosso Radar Digital' : 'Our Digital Radar'}
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground/80 max-w-2xl mx-auto font-sans leading-relaxed">
               {language === 'pt'
-                ? 'Acompanhe nossas últimas publicações, artigos e participações em eventos sobre Direito Digital.'
-                : 'Follow our latest publications, articles, and event participations on Digital Law.'}
+                ? 'Perspectivas jurídicas, artigos profundos e nossa visão de vanguarda sobre o futuro do Direito e Tecnologia.'
+                : 'Legal perspectives, deep articles, and our vanguard vision on the future of Law and Technology.'}
             </p>
           </motion.div>
 
-          {/* Filter Tabs */}
+          {/* Filtros em Formato Pill (Premium Animado) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12"
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap justify-center items-center gap-2 md:gap-3 mb-16 p-2 bg-secondary/30 backdrop-blur-md rounded-full w-fit mx-auto border border-border/40"
           >
             {filterOptions.map((option) => (
-              <Button
+              <button
                 key={option.key}
-                variant={activeFilter === option.key ? 'default' : 'outline'}
-                size="sm"
                 onClick={() => handleFilterChange(option.key)}
-                className={`transition-all duration-300 ${
+                className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 ease-out outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   activeFilter === option.key
-                    ? 'bg-accent text-accent-foreground hover:bg-accent/90'
-                    : 'hover:border-accent/50 hover:text-accent'
+                    ? 'text-white shadow-[0_0_20px_-5px_rgba(var(--accent),0.4)] dark:text-black'
+                    : 'text-muted-foreground/70 hover:text-foreground hover:bg-white/5'
                 }`}
               >
-                {option.label[language]}
-              </Button>
+                {activeFilter === option.key && (
+                  <motion.div 
+                    layoutId="active-pill"
+                    className="absolute inset-0 bg-accent rounded-full -z-10"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{option.label[language]}</span>
+              </button>
             ))}
           </motion.div>
 
-          {/* Publications Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-            {visiblePublications.map((publication, index) => (
-              <PostCard
-                key={publication.id}
-                publication={publication}
-                index={index}
-              />
-            ))}
-          </div>
+          {/* Grid de Publicações com AnimatePresence e Modo popLayout para Reposicionamento Mágico */}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <AnimatePresence mode="popLayout">
+              {visiblePublications.map((publication, index) => (
+                <PostCard
+                  key={publication.id}
+                  publication={publication}
+                  index={index}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
-          {/* Empty State */}
-          {filteredPublications.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <p className="text-muted-foreground">
-                {language === 'pt'
-                  ? 'Nenhuma publicação encontrada nesta categoria.'
-                  : 'No publications found in this category.'}
-              </p>
-            </motion.div>
-          )}
-
-          {/* Load More Button */}
-          {hasMore && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex justify-center"
-            >
-              <Button
-                onClick={handleLoadMore}
-                disabled={isLoading}
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
+          {/* Empty State Animado */}
+          <AnimatePresence>
+            {filteredPublications.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center py-20 bg-secondary/10 rounded-3xl border border-border/20 backdrop-blur-sm"
               >
-                {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-                {language === 'pt' ? 'Carregar Mais' : 'Load More'}
-              </Button>
-            </motion.div>
-          )}
+                <div className="w-16 h-16 rounded-full bg-secondary/50 flex items-center justify-center mx-auto mb-4 border border-border">
+                  <span className="text-2xl opacity-50">📭</span>
+                </div>
+                <p className="text-muted-foreground font-medium text-lg">
+                  {language === 'pt'
+                    ? 'Nenhuma publicação encontrada nesta categoria no momento.'
+                    : 'No publications found in this category at the moment.'}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Botão de Ver Mais Elegante */}
+          <AnimatePresence>
+            {hasMore && (
+              <motion.div
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex justify-center mt-12"
+              >
+                <Button
+                  onClick={handleLoadMore}
+                  disabled={isLoading}
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full px-8 py-6 font-semibold border-border/50 hover:bg-secondary/50 hover:border-accent text-foreground transition-all duration-300 gap-3 min-w-[200px]"
+                >
+                  {isLoading ? (
+                    <Loader2 className="h-5 w-5 animate-spin text-accent" />
+                  ) : (
+                    language === 'pt' ? 'Carregar Mais Histórias' : 'Load More Stories'
+                  )}
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </main>
 

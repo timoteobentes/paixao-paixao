@@ -1,59 +1,83 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { toast } from 'sonner';
+
+const formSchema = z.object({
+  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
+  email: z.string().email('E-mail inválido'),
+  subject: z.string().min(2, 'O assunto é obrigatório'),
+  message: z.string().min(10, 'A mensagem deve ter pelo menos 10 caracteres'),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 export const ContactForm = () => {
   const { t } = useLanguage();
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const onSubmit = async (data: FormData) => {
+    try {
+      // Usando Web3Forms com a variável de ambiente do Vite
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      
+      if (!accessKey) {
+        toast.error('Erro de configuração: Chave da API não encontrada.');
+        return;
+      }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          ...data,
+        }),
+      });
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+      const result = await response.json();
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    toast({
-      title: t.contact.form.success,
-      description: formData.email,
-    });
-
-    // Reset after showing success
-    setTimeout(() => {
-      setIsSuccess(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+      if (result.success) {
+        setIsSuccess(true);
+        toast.success('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        reset();
+        
+        // Reset success animation after a few seconds
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        toast.error('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+      }
+    } catch (error) {
+      toast.error('Falha na conexão. Por favor, cheque sua internet e tente novamente.');
+    }
   };
 
   return (
     <motion.form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="space-y-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div className="space-y-2">
@@ -62,13 +86,11 @@ export const ContactForm = () => {
           </label>
           <Input
             id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="bg-background border-border focus:border-accent focus:ring-accent"
+            {...register('name')}
+            className={`bg-secondary/50 backdrop-blur-sm border-border/50 focus:border-accent focus:ring-accent transition-all duration-300 ${errors.name ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : ''}`}
             placeholder="João Silva"
           />
+          {errors.name && <span className="text-red-400 text-xs">{errors.name.message}</span>}
         </div>
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium text-foreground">
@@ -76,14 +98,12 @@ export const ContactForm = () => {
           </label>
           <Input
             id="email"
-            name="email"
             type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="bg-background border-border focus:border-accent focus:ring-accent"
+            {...register('email')}
+            className={`bg-secondary/50 backdrop-blur-sm border-border/50 focus:border-accent focus:ring-accent transition-all duration-300 ${errors.email ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : ''}`}
             placeholder="joao@email.com"
           />
+          {errors.email && <span className="text-red-400 text-xs">{errors.email.message}</span>}
         </div>
       </div>
 
@@ -93,13 +113,11 @@ export const ContactForm = () => {
         </label>
         <Input
           id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-          className="bg-background border-border focus:border-accent focus:ring-accent"
+          {...register('subject')}
+          className={`bg-secondary/50 backdrop-blur-sm border-border/50 focus:border-accent focus:ring-accent transition-all duration-300 ${errors.subject ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : ''}`}
           placeholder={t.services.items.compliance.title}
         />
+        {errors.subject && <span className="text-red-400 text-xs">{errors.subject.message}</span>}
       </div>
 
       <div className="space-y-2">
@@ -108,39 +126,46 @@ export const ContactForm = () => {
         </label>
         <Textarea
           id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
+          {...register('message')}
           rows={5}
-          className="bg-background border-border focus:border-accent focus:ring-accent resize-none"
+          className={`bg-secondary/50 backdrop-blur-sm border-border/50 focus:border-accent focus:ring-accent transition-all duration-300 resize-none ${errors.message ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : ''}`}
           placeholder="Descreva sua necessidade..."
         />
+        {errors.message && <span className="text-red-400 text-xs">{errors.message.message}</span>}
       </div>
 
       <Button
         type="submit"
         size="lg"
         disabled={isSubmitting || isSuccess}
-        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-medium rounded-xl py-6"
+        className="w-full relative group overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl py-6 tracking-wide shadow-[0_0_20px_-5px_rgba(var(--primary),0.4)] transition-all duration-500"
       >
-        {isSuccess ? (
-          <>
-            <CheckCircle className="mr-2 h-5 w-5" />
-            {t.contact.form.success}
-          </>
-        ) : isSubmitting ? (
-          <motion.div
-            className="h-5 w-5 border-2 border-accent-foreground border-t-transparent rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          />
-        ) : (
-          <>
-            <Send className="mr-2 h-5 w-5" />
-            {t.contact.form.send}
-          </>
-        )}
+        <span className="flex items-center justify-center relative z-10">
+          {isSuccess ? (
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="flex items-center"
+            >
+              <CheckCircle className="mr-2 h-5 w-5 text-green-400" />
+              {t.contact.form.success}
+            </motion.div>
+          ) : isSubmitting ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center"
+            >
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              Enviando...
+            </motion.div>
+          ) : (
+            <div className="flex items-center">
+              <Send className="mr-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              {t.contact.form.send}
+            </div>
+          )}
+        </span>
       </Button>
     </motion.form>
   );

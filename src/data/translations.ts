@@ -196,7 +196,7 @@ export const translations: Record<'pt' | 'en', Translation> = {
         title: 'Informações de Contato',
         email: 'contato@paixao.adv.br',
         phone: '+55 (92) 94811-4406',
-        address: 'Rua 24 de Maio, 220 - Centro, Manaus - AM (Edifício Rio Negro Center, sala 219)',
+        address: 'Rua 24 de Maio, 220 - Centro, Manaus/AM - CEP 69010-080 (Edifício Rio Negro Center, sala 619)',
       },
     },
     footer: {
@@ -342,7 +342,7 @@ export const translations: Record<'pt' | 'en', Translation> = {
         title: 'Contact Information',
         email: 'contato@paixao.adv.br',
         phone: '+55 (92) 94811-4406',
-        address: 'Rua 24 de Maio, 220 - Centro, Manaus - AM (Edifício Rio Negro Center, sala 219)',
+        address: 'Rua 24 de Maio, 220 - Centro, Manaus/AM - CEP 69010-080 (Edifício Rio Negro Center, sala 619)',
       },
     },
     footer: {
