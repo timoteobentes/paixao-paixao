@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { teamMembers, TeamMember } from '@/data/team';
 import { TeamCard } from './TeamCard';
 import { X, Linkedin, Instagram } from 'lucide-react';
 
-const modalVariants = {
+const modalVariants: Variants = {
   hidden: { opacity: 0, y: 50, scale: 0.95 },
   visible: { 
     opacity: 1, 
@@ -27,7 +27,7 @@ const modalVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
