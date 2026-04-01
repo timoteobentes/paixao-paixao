@@ -56,6 +56,42 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: '3',
+    name: 'Dr. Ricardo Carvalho Paixão',
+    role: {
+      pt: 'Advogado (OAB/AM n. 3.742)',
+      en: 'Lawyer (OAB/AM n. 3.742)',
+    },
+    bio: {
+      pt: 'Advogado (OAB/AM n. 3.742) com 25 anos de experiência, com atuação destacada em Manaus e Brasília. Professor universitário e de pós-graduação, com sólida contribuição na formação acadêmica e profissional no campo jurídico. Fundador e CEO do ITEAM, desenvolve e lidera iniciativas voltadas à inovação, capacitação e aprimoramento estratégico no setor jurídico, com foco em excelência, tecnologia e desenvolvimento institucional.',
+      en: "Lawyer (OAB/AM n. 3.742) with 25 years of experience, with a distinguished career in Manaus and Brasília. University and postgraduate professor, with solid contributions to the academic and professional training in the legal field. Founder and CEO of ITEAM, he develops and leads initiatives focused on innovation, training, and strategic improvement in the legal sector, with a focus on excellence, technology, and institutional development.",
+    },
+    image: '/ricardo.png',
+    linkedin: 'https://www.linkedin.com/in/ricardo-paix%C3%A3o-a83aa475',
+    instagram: 'https://www.instagram.com/ricopaixao_',
+    facebook: '',
+    x: '',
+    lattes: ''
+  },
+  {
+    id: '4',
+    name: 'Dra. Gisella Paixão',
+    role: {
+      pt: 'Advogado (OAB/AM n. 3.742)',
+      en: 'Lawyer (OAB/AM n. 3.742)',
+    },
+    bio: {
+      pt: 'Advogado (OAB/AM n. 3.742).',
+      en: "Lawyer (OAB/AM n. 3.742).",
+    },
+    image: '/gisella.png',
+    linkedin: '',
+    instagram: '',
+    facebook: '',
+    x: '',
+    lattes: ''
+  },
+  {
+    id: '5',
     name: 'Waleska Braga',
     role: {
       pt: 'Economista. Especialista em Métodos Ágeis',
@@ -68,24 +104,6 @@ export const teamMembers: TeamMember[] = [
     image: '/waleska.png',
     linkedin: '',
     instagram: 'https://www.instagram.com/waleskafbraga',
-    facebook: '',
-    x: '',
-    lattes: ''
-  },
-  {
-    id: '4',
-    name: 'Sofia Laranjeira',
-    role: {
-      pt: 'Analista de Inovação',
-      en: 'Innovation Analyst',
-    },
-    bio: {
-      pt: 'Analista de Inovação',
-      en: 'Innovation Analyst',
-    },
-    image: 'https://renatapimentel.com.br/wp-content/uploads/2024/06/advogado-para-empresas-scaled.jpg',
-    linkedin: 'https://www.linkedin.com/in/sofia-laranjeira-a91644186',
-    instagram: 'https://www.instagram.com/sofialrj_/',
     facebook: '',
     x: '',
     lattes: ''
