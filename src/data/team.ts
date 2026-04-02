@@ -72,26 +72,26 @@ export const teamMembers: TeamMember[] = [
     x: '',
     lattes: ''
   },
+  // {
+  //   id: '4',
+  //   name: 'Dra. Gisella Paixão',
+  //   role: {
+  //     pt: 'Advogado (OAB/AM n. 3.742)',
+  //     en: 'Lawyer (OAB/AM n. 3.742)',
+  //   },
+  //   bio: {
+  //     pt: 'Advogado (OAB/AM n. 3.742).',
+  //     en: "Lawyer (OAB/AM n. 3.742).",
+  //   },
+  //   image: '/gisella.png',
+  //   linkedin: '',
+  //   instagram: '',
+  //   facebook: '',
+  //   x: '',
+  //   lattes: ''
+  // },
   {
     id: '4',
-    name: 'Dra. Gisella Paixão',
-    role: {
-      pt: 'Advogado (OAB/AM n. 3.742)',
-      en: 'Lawyer (OAB/AM n. 3.742)',
-    },
-    bio: {
-      pt: 'Advogado (OAB/AM n. 3.742).',
-      en: "Lawyer (OAB/AM n. 3.742).",
-    },
-    image: '/gisella.png',
-    linkedin: '',
-    instagram: '',
-    facebook: '',
-    x: '',
-    lattes: ''
-  },
-  {
-    id: '5',
     name: 'Waleska Braga',
     role: {
       pt: 'Economista. Especialista em Métodos Ágeis',
